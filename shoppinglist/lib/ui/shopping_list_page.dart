@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoppinglist/ui/dialog/item_dialog.dart';
+import 'package:shoppinglist/ui/shopping_list_item_page.dart';
 
 class ShoppingListPage extends StatefulWidget {
   @override
@@ -35,9 +36,7 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
         Container(
           color: Colors.white,
         ),
-        Container(
-          color: Colors.white,
-        ),
+        ShoppingListItemPage(),
         Container(
           color: Colors.white,
         ),
