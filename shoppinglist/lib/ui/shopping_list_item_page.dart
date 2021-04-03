@@ -29,7 +29,15 @@ class _ShoppingListItemPageState extends State<ShoppingListItemPage> {
             itemBuilder: (BuildContext context, int index) {
               Item item = snapshot.data[index];
 
-              return ListTile(title: Text(item.name),);
+              return CheckboxListTile(
+                title: Text(item.name),
+                onChanged: (bool value) async {
+                  item.isCompleted = !item.isCompleted;
+                  await itemService.editItem(item);
+                  setState(() {});
+                },
+                value: item.isCompleted,
+              );
             },);
         }
         if(snapshot.hasError){

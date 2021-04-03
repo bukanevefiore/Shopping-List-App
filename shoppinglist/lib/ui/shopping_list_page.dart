@@ -48,7 +48,7 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
             var item= Item(name:itemName,isCompleted:false,isArchived:false);
 
             try {
-              await itemService.addItem(item.toJson());
+              await itemService.addItem(item);
 
               // sayfa güncellemerli için kullanıyoruz
               setState(() {});
