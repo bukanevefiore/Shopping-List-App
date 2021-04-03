@@ -19,4 +19,19 @@ class ItemService{
       throw Exception("Something went wrong");
     }
   }
+
+  Future<Item> addItem(String itemJson) async{
+    final response=await http.post(Uri.parse(serviceUrl),headers: {
+      'content-type':'application/json'
+    }, body: itemJson);
+    
+    if(response.statusCode == 201){
+      Map item=json.decode(response.body);
+      
+      return Item.fromjson(item);
+    }
+    else{
+      throw Exception("Something went wrong");
+    }
+  }
 }
