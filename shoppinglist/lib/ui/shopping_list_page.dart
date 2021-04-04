@@ -25,9 +25,7 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
       if(currentIndex != selectedindex){
         selectedindex=currentIndex;
 
-        setState(() {
-
-        });
+        setState(() {});
       }
     });
     super.initState();
@@ -37,28 +35,6 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: AppBar(title: Text("Shopping List"),),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          String itemName=await showDialog(
-              context: context,
-              builder: (BuildContext context)=>ItemDialog());
-
-          if(itemName.isNotEmpty){
-            var item= Item(name:itemName,isCompleted:false,isArchived:false);
-
-            try {
-              await itemService.addItem(item);
-
-              // sayfa güncellemerli için kullanıyoruz
-              setState(() {});
-            }catch(ex){
-              scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(ex.toString())));
-            }
-          }
-        },
-        child: Icon(Icons.add),
-      ),
       bottomNavigationBar: BottomNavigationBar(items: [
         BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Home")),
         BottomNavigationBarItem(icon: Icon(Icons.list), title: Text("Shopping List")),
