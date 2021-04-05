@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:shoppinglist/models/item.dart';
+import 'package:shoppinglist/models/overview.dart';
 
 class ItemService{
   final String serviceUrl='kesali-shopping.herokuapp.com';
 
+  // listedekileri listeleme
   Future<List<Item>> fetchItems() async {
 
     var uri=Uri.https(serviceUrl,"item");
@@ -21,6 +23,7 @@ class ItemService{
     }
   }
 
+  // listeye item ekleme
   Future<Item> addItem(Item item) async {
     var uri = Uri.https(serviceUrl, "item");
 
@@ -37,7 +40,7 @@ class ItemService{
   }
 
 
-
+  // listedeki itemlerde edit yapma silme
   Future<Item> editItem(Item item) async {
     var uri = Uri.https(serviceUrl, "item/${item.id}");
 
@@ -53,6 +56,7 @@ class ItemService{
     }
   }
 
+  // arşive ekleme
   Future<void> addToArchive() async {
 
     var uri=Uri.https(serviceUrl,"history");
@@ -63,6 +67,7 @@ class ItemService{
     }
   }
 
+  // arşivdekileri listeleme
   Future<List<Item>> fetchArchive(int take, int skip) async {
     var parameters = {"take": take.toString(), "skip": skip.toString()};
 
@@ -75,6 +80,20 @@ class ItemService{
 
       return items.map((item) => Item.fromjson(item)).toList();
     } else {
+      throw Exception("Something went wrong");
+    }
+  }
+
+  Future<OverView> overview() async{
+    var uri=Uri.https(serviceUrl, "overview");
+
+    final response=await http.get(uri);
+
+    if(response.body == 200){
+      Map overview = json.decode(response.body);
+      return OverView.fromJson(overview);
+
+    }else{
       throw Exception("Something went wrong");
     }
   }

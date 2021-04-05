@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shoppinglist/http/item_service.dart';
 import 'package:shoppinglist/models/item.dart';
 import 'package:shoppinglist/ui/dialog/item_dialog.dart';
+import 'package:shoppinglist/ui/shopping_list_history_page.dart';
 import 'package:shoppinglist/ui/shopping_list_item_page.dart';
+import 'package:shoppinglist/ui/shopping_list_main_page.dart';
 
 class ShoppingListPage extends StatefulWidget {
   @override
@@ -45,14 +47,10 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
       body: PageView(
         controller: pageController,
         children: <Widget>[
-        Container(
-          color: Colors.white,
-        ),
+        ShoppinListMainPage(),
         ShoppingListItemPage(),
-        Container(
-          color: Colors.white,
-        ),
-      ],),
+        ShoppingListHistoryPage(),
+        ],),
     );
   }
 

@@ -79,7 +79,7 @@ class _ShoppingListItemPageState extends State<ShoppingListItemPage> {
                   if(snapshot.hasError){
                     return Text(snapshot.error.toString());
                   }
-                  return CircularProgressIndicator();
+                  return Center(child: CircularProgressIndicator());
                 },),
             Positioned(
               right: 16,
@@ -90,7 +90,7 @@ class _ShoppingListItemPageState extends State<ShoppingListItemPage> {
                       context: context,
                       builder: (BuildContext context)=>ItemDialog());
 
-                  if(itemName.isNotEmpty){
+                  if(itemName != null && itemName.isNotEmpty){
                     var item= Item(name:itemName,isCompleted:false,isArchived:false);
 
                     try {
